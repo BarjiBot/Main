@@ -1,5 +1,5 @@
 // Token import
-const Token = require('./Token');
+const Token = require('./Credentials/Token');
 TOKEN = Token.GetToken();
 
 // Discord JS import
