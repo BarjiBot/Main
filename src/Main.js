@@ -8,7 +8,7 @@ const bot = new Client({ intents: [Intents.FLAGS.DIRECT_MESSAGES] });
 
 bot.login(TOKEN); // Bot Start Up
 
-
+//jkjj
 
 
 
