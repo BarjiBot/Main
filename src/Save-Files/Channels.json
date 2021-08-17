@@ -1,4 +1,10 @@
 {
-	"File Use": "This file is used to store the channels ids, incase of a bot shutdown the ids will be saved"
+	"//File Use": "This file is used to store the channels ids, incase of a bot shutdown the ids will be saved",
+	
+	"Server ID": {
+		"Channel 1 ID": "Channel 1 Name",
+		"Channel 2 ID": "Channel 2 Name",
+		"//And So On": ""
+	}
 	
 }
