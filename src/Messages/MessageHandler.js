@@ -1,6 +1,8 @@
 const { Message } = require("discord.js");
-
+const { ID } = require('../Credentials/Config.json')
 
 module.exports = (async function(msg = new Message()){
-	console.log(msg.content);
+	if(msg.member.id != ID){
+		console.log(msg.content);
+	}
 });	
