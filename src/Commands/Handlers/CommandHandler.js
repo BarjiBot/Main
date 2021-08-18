@@ -6,14 +6,39 @@ const { CFM } = require("./CommandFiles");
 module.exports = (async function(msg = new Message()){
 	//console.log(msg);
 	if(msg.content[0] == Prefix){
-		rmsg = msg.content.substring(1).toLowerCase();
-		cmd = CFM.get(rmsg);
-		console.log(`\nDetected Prefix + ${msg.content.substring(1).toLowerCase()}`);
+		
+		console.log(msg.content.indexOf(' '));
+
+		// The message string
+		content = msg.content; 
+
+		// The Command
+		cmdInput = msg.content.substring(1, msg.content.indexOf(' ')).toLowerCase();
+		// Incase The Command Doesn't have any arguments
+		if(!content.includes(' ')) cmdInput = msg.content.substring(1).toLowerCase();
+
+		// The Command File (if it exists)
+		cmd = CFM.get(cmdInput);
+		
+		console.log(`\nDetected Prefix + ${cmdInput}`); // Debug
+
+		// Checks if command exists, if not returns
 		if(!cmd){
-			console.log(`No such command as ${msg.content}. returning`); 
+			console.log(`No such command as ${cmdInput}. returning`); // Debug
 			return;
 		}
-		console.log(cmd);
+
+		// Arguments
+		msg.args = [];
+		while(content.includes(' ') && content.includes(' ') + 1 != content.length){
+			msg.args.push(content.substring(content.indexOf(' ') + 1));
+			content = content.substring(content.indexOf(' ') + 1);
+		}
+
+		console.log(msg.args) // Debug
+		console.log(cmd); // Debug
+
+		// Sends the message info and the arguments to the file
 		cmd.execute(msg);
 	}
 
