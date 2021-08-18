@@ -20,8 +20,8 @@ const EmbedConfirmation =
 function messageSent(msg = new Message(), args = []){
 	console.log("function started");
 	if(!msg.args.includes(Confirmation) || !msg.args){
-		msg.reply({ embeds: [EmbedConfirmation]});
-		//msg.delete();
+		msg.reply({ embeds: [EmbedConfirmation]}).then(mesg => {msg.delete();});
+		
 		return; 
 	}
 	
