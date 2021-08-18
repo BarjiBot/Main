@@ -18,6 +18,9 @@ const bot = new Client({ intents: intentsList });
 // Command Handler import - Handles command files and executes them at send of message
 const CommandHandler = require('./Commands/Handlers/CommandHandler');
 
+// Message Handler import - Handles messages
+const MessageHandler = require('./Messages/MessageHandler');
+
 
 // Bot Startup Message
 bot.once('ready', () => {
@@ -25,7 +28,7 @@ bot.once('ready', () => {
 }); 
 
 // Message Detection And Redirect To CommandHandler
-bot.on('messageCreate', msg => CommandHandler(msg));
+bot.on('messageCreate', msg => {CommandHandler(msg); MessageHandler(msg);});
 
 
 bot.login(TOKEN); // Bot Start Up
