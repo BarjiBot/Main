@@ -1,24 +1,30 @@
 const { Message, MessageEmbed } = require('discord.js');
-const { Confirmation, ProfilePic } = require('../Credentials/Config.json');
+const { Confirmation, ProfilePic  } = require('../Credentials/Config.json');
+const fs = require('fs');
 
-var n = "adchannel";
+
+var n = "addpermrole";
 
 //#region Embed Confirmation
-const EmbedConfirmation = new MessageEmbed()
+const EmbedConfirmation = 
+	
+	new MessageEmbed()
 	.setColor('#ff1953')
 	.setTitle('Confirm Action')
-	.setDescription(`do you want to add this channel to the advertising channels list?
-	\n(you can change it later on and delete this channel from the list)`)
+	.setDescription(`This role will be added to the mod commands permitted roles
+	\n(you can remove it later on)`)
 	.setFooter(`please confirm this action by typing -${n} ${Confirmation}`)
 	.setTimestamp();
 //#endregion
 
 function messageSent(msg = new Message(), args = []){
 	console.log("function started");
-	if(!msg.args.includes(Confirmation)){
-		msg.reply({ embeds: [EmbedConfirmation]}).then(mesg => {msg.delete();});
+	if(!msg.args.includes(Confirmation) || !msg.args){
+		msg.reply({ embeds: [EmbedConfirmation]});
+		//msg.delete();
 		return; 
 	}
+	
 }
 
 module.exports = ({

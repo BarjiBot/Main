@@ -31,12 +31,12 @@ module.exports = (async function(msg = new Message()){
 		// Arguments
 		msg.args = [];
 		while(content.includes(' ') && content.includes(' ') + 1 != content.length){
+			console.log(content);
 			msg.args.push(content.substring(content.indexOf(' ') + 1));
 			content = content.substring(content.indexOf(' ') + 1);
 		}
 
 		console.log(msg.args) // Debug
-		console.log(cmd); // Debug
 
 		// Sends the message info and the arguments to the file
 		cmd.execute(msg);
