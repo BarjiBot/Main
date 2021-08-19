@@ -1,22 +1,16 @@
-const { Message, MessageEmbed } = require('discord.js');
-const { COLORS } = require('../Credentials/Config.json');
+const { Message } = require('discord.js');
+const { EmbedNeedConfirmation } = require('../Messages/Messages');
 
 var n = "adchannel";
 
-//#region Embed Confirmation
-const EmbedConfirmation = new MessageEmbed()
-	.setColor(COLORS.HEXS.RED)
-	.setTitle('Confirm Action')
-	.setDescription(`do you want to add this channel to the advertising channels list?
-	\n(you can change it later on and delete this channel from the list)`)
-	.setFooter(`please confirm this action by typing -${n} ${Confirmation}`)
-	.setTimestamp();
-//#endregion
+
 
 function messageSent(msg = new Message(), args = []){
 	console.log("function started");
 	if(!msg.args.includes(CONFIRM)){
-		msg.reply({ embeds: [EmbedConfirmation]}).then(mesg => {msg.delete();});
+		EmbedNeedConfirmation.setDescription(`This action will add this channel to the advertising channels list
+		\n(This can be changed later on))`);
+		msg.reply({ embeds: [EmbedNeedConfirmation] }).then(mesg => {msg.delete();});
 		return; 
 	}
 

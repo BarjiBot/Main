@@ -1,6 +1,5 @@
-
-// Token import
-const { TOKEN } = require('./Credentials/Config');
+// Config import
+const { TOKEN, PREFIX } = require('./Credentials/Config');
 
 
 // Discord JS import
@@ -12,11 +11,20 @@ const bot = new Client({
 		Intents.FLAGS.GUILD_BANS,
 		Intents.FLAGS.GUILD_MEMBERS,
 		Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-		Intents.FLAGS.GUILD_WEBHOOKS
+		Intents.FLAGS.GUILD_WEBHOOKS,
+		Intents.FLAGS.GUILD_PRESENCES,
+		Intents.FLAGS.GUILD_INTEGRATIONS,
+		Intents.FLAGS.GUILD_VOICE_STATES,
+		Intents.FLAGS.GUILD_MESSAGE_TYPING,
+		Intents.FLAGS.GUILD_INVITES,
+		Intents.FLAGS.DIRECT_MESSAGES,
+		Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
+		Intents.FLAGS.DIRECT_MESSAGE_TYPING,
+		Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS
+
 ]});
 
 
-const SaveFile = require('./Save/Save_File.json');
 const Saving = require('./Save/Save_File');
 
 // Command Handler import - Handles command files and executes them at send of message
@@ -27,16 +35,20 @@ const MessageHandler = require('./Messages/MessageHandler');
 
 
 
+
+
 // Bot Startup Message
 bot.once('ready', () => {
+	
 	console.log(`${bot.user.tag} has been activated succesfully`);
 
+
 	// Bot's Status
-	bot.user.setActivity(`Use ${PREFIX}}help`, {
+	bot.user.setActivity(`Use ${PREFIX}help`, {
 		type: "STREAMING",
 		
 		url: "https://www.twitch.tv/barji"
-});
+	});
 
 });
 
@@ -48,15 +60,13 @@ bot.on('messageCreate', msg => {
 	MessageHandler(msg);
 });
 
-bot.on('interactionCreate', interaction => {
-	if (!interaction.isButton()) return;
-	var arr = interaction.customId.split(",");
-	Saving.SAVE(arr[0], arr[1], arr[2]);
 
-});
+
+
 
 
 bot.login(TOKEN); // Bot Start Up
+
 
 
 

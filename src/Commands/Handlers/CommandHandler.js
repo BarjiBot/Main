@@ -1,11 +1,11 @@
 const { Message } = require("discord.js");
-const { Prefix } = require('../../Credentials/Config.json');
+const { PREFIX } = require('../../Credentials/Config.json');
 const { CFM } = require("./CommandFiles");
 
 
 module.exports = (async function(msg = new Message()){
 	//console.log(msg);
-	if(msg.content[0] == Prefix){
+	if(msg.content[0] == PREFIX){
 		
 		console.log(msg.content.indexOf(' '));
 
