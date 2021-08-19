@@ -1,5 +1,5 @@
 const { Message, MessageEmbed } = require('discord.js');
-const { Confirmation, ProfilePic } = require('../Credentials/Config.json');
+const { Confirmation, ProfilePic, COLORS } = require('../Credentials/Config.json');
 
 var n = "adchannel";
 
@@ -19,6 +19,7 @@ function messageSent(msg = new Message(), args = []){
 		msg.reply({ embeds: [EmbedConfirmation]}).then(mesg => {msg.delete();});
 		return; 
 	}
+
 }
 
 module.exports = ({

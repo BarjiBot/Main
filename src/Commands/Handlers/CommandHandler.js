@@ -38,6 +38,8 @@ module.exports = (async function(msg = new Message()){
 
 		console.log(msg.args) // Debug
 
+		msg.confirm = false; // Confirmation 
+
 		// Sends the message info and the arguments to the file
 		cmd.execute(msg);
 	}

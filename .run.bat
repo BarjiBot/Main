@@ -1,2 +1,2 @@
+node -v
 npm run start
-node --trace-warnings ...
