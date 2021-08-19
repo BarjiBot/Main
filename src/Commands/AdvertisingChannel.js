@@ -5,7 +5,7 @@ var n = "adchannel";
 
 //#region Embed Confirmation
 const EmbedConfirmation = new MessageEmbed()
-	.setColor('#ff1953')
+	.setColor(COLORS.HEXS.RED)
 	.setTitle('Confirm Action')
 	.setDescription(`do you want to add this channel to the advertising channels list?
 	\n(you can change it later on and delete this channel from the list)`)

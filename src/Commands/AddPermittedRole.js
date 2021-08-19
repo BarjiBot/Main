@@ -1,5 +1,5 @@
 const { Message, MessageEmbed } = require('discord.js');
-const { Confirmation, ProfilePic  } = require('../Credentials/Config.json');
+const { Confirmation, ProfilePic, COLORS  } = require('../Credentials/Config.json');
 const fs = require('fs');
 
 
@@ -9,7 +9,7 @@ var n = "addpermrole";
 const EmbedConfirmation = 
 	
 	new MessageEmbed()
-	.setColor('#ff1953')
+	.setColor(COLORS.HEXS.RED)
 	.setTitle('Confirm Action')
 	.setDescription(`This role will be added to the mod commands permitted roles
 	\n(you can remove it later on)`)
