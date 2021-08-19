@@ -16,7 +16,7 @@ for (const file of CF) {
 	// with the key as the command name and the value as the exported module
 	CFM.set(command.name, command);
 }
-console.log(`succesfully ran CommandFiles, current commands: ${Array.from(CFM.keys())}`);
+console.log(`succesfully ran CommandFiles, current commands: \n${Array.from(CFM.keys()).join(', ')}`);
 
 module.exports = {
 	CFM,

@@ -1,8 +1,8 @@
-const { Message, RoleManager, Role } = require("discord.js");
+const { Message } = require("discord.js");
 const { ID } = require('../Credentials/Config.json');
 const Saving = require('../Save_File.js');
 const SaveFile = require('../Save_File.json');
-const fs = require('fs');
+
 
 module.exports = (async function(msg = new Message()){
 	if(msg.member.id != ID){

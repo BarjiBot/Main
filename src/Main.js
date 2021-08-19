@@ -1,7 +1,7 @@
 
 // Token import
-const { Token } = require('./Credentials/Config');
-TOKEN = Token;
+const { TOKEN } = require('./Credentials/Config');
+
 
 // Discord JS import
 const { Client, Intents } = require('discord.js');
@@ -27,11 +27,20 @@ const MessageHandler = require('./Messages/MessageHandler');
 
 
 
-
 // Bot Startup Message
 bot.once('ready', () => {
 	console.log(`${bot.user.tag} has been activated succesfully`);
-}); 
+
+	// Bot's Status
+	bot.user.setActivity(`Use ${PREFIX}}help`, {
+		type: "STREAMING",
+		
+		url: "https://www.twitch.tv/barji"
+});
+
+});
+
+ 
 
 // Message Detection And Redirect To CommandHandler
 bot.on('messageCreate', msg => {
@@ -48,6 +57,8 @@ bot.on('interactionCreate', interaction => {
 
 
 bot.login(TOKEN); // Bot Start Up
+
+
 
 
 

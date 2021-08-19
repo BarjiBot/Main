@@ -1,5 +1,5 @@
 const { Message, MessageEmbed } = require('discord.js');
-const { Confirmation, ProfilePic, COLORS } = require('../Credentials/Config.json');
+const { COLORS } = require('../Credentials/Config.json');
 
 var n = "adchannel";
 
@@ -15,7 +15,7 @@ const EmbedConfirmation = new MessageEmbed()
 
 function messageSent(msg = new Message(), args = []){
 	console.log("function started");
-	if(!msg.args.includes(Confirmation)){
+	if(!msg.args.includes(CONFIRM)){
 		msg.reply({ embeds: [EmbedConfirmation]}).then(mesg => {msg.delete();});
 		return; 
 	}

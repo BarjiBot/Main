@@ -1,6 +1,5 @@
-const { Message, MessageEmbed, MessageActionRow, MessageButton, Emoji} = require('discord.js');
-const { Confirmation, ProfilePic, COLORS  } = require('../Credentials/Config.json');
-const fs = require('fs');
+const { Message, MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { COLORS  } = require('../Credentials/Config.json');
 //const { MessageButtonStyles } = require('discord.js/typings/enums');
 
 
