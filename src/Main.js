@@ -16,8 +16,8 @@ const bot = new Client({
 ]});
 
 
-const SaveFile = require('./Save_File.json');
-const Saving = require('./Save_File');
+const SaveFile = require('./Save/Save_File.json');
+const Saving = require('./Save/Save_File');
 
 // Command Handler import - Handles command files and executes them at send of message
 const CommandHandler = require('./Commands/Handlers/CommandHandler');

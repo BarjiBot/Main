@@ -1,7 +1,7 @@
 const { Message } = require("discord.js");
 const { ID } = require('../Credentials/Config.json');
-const Saving = require('../Save_File.js');
-const SaveFile = require('../Save_File.json');
+const Saving = require('../Save/Save_File.js');
+const SaveFile = require('../Save/Save_File.json');
 
 
 module.exports = (async function(msg = new Message()){
