@@ -14,9 +14,9 @@ function SETUP(server){
 
 function SAVE(server, location, data){
 	
-
-	console.log("stringfy: " + JSON.stringify(data));
-	SaveFile[server][location] += data;
+	data = data.split(":");
+	data1 = data[1];
+	SaveFile[server][location][data[0]] = data[1];
 
 	fs.writeFile('src/Save_File.json', JSON.stringify(SaveFile), function writeJSON(err) {
 		if (err) return console.log(err);

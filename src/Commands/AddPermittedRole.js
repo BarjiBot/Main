@@ -55,7 +55,7 @@ const EmbedNeedConfirmation =
 function messageSent(msg = new Message(), args = []){
 	//console.log(MessageButtonStyles.DANGER);
 	if(!msg.confirm){
-		msg.guild.roles.cache.forEach(role => console.log(role.name, role.id));
+		
 		if(msg.mentions.roles.first()){
 			EmbedNeedConfirmation.setFooter(`please confirm this action by clicking the button below`);
 			ButtonNeedConfirmation.components[0].setCustomId(`${msg.guild.id},Roles,${msg.mentions.roles.first().name}:${msg.mentions.roles.first().id}`);
