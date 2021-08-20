@@ -19,12 +19,14 @@ function interact(msg = new Message(), bmsg = new Message()){
 	
 	collector.on('end', (ButtonInteraction) => {
 		if(ButtonInteraction.first().customId == YESNO.DENY){
+			EmbedCanceled.setAuthor(msg.author.username, msg.author.avatarURL());
 			bmsg.edit({ embeds: [EmbedCanceled], components: [] });
 			return; 
 		}
 		id = ButtonInteraction.first().customId.split(',');
 		
 		if(id[1] == SAVES.Roles){
+			EmbedSuccess.setAuthor(msg.author.username, msg.author.avatarURL());
 			bmsg.edit({ embeds: [EmbedSuccess], components: [] });
 			Saving.EXECUTESAVE(msg.guild.id, SAVES.Roles, id[2]);
 		}

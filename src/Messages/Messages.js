@@ -1,38 +1,33 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
-const { COLORS } = require('../Credentials/Config.json');
+const { COLORS, YESNO } = require('../Credentials/Config.json');
 
 //#region Embed Failed
 const EmbedFailed = 
 	new MessageEmbed()
-	.setColor(COLORS.HEXS.DARKRED)
-	.setTitle('FAILED, NO REASON FOUND')
-	.setTimestamp();
+		.setColor(COLORS.HEXS.DARKRED)
+		.setTitle('FAILED, NO REASON FOUND')
+		.setTimestamp();
 //#endregion
 
 //#region Embed No Mention
 const EmbedMissingArgs = 
 	new MessageEmbed()
 	.setColor(COLORS.HEXS.RED)
-	.setTitle('No Mention Found')
+	.setTitle('Missing Values')
+	.setDescription('Missing values for command to run')
 	.setTimestamp();
 //#endregion
 
-//#region Button Confirm
-const ButtonNeedConfirmation = 
+//#region Button ConfirmDeny
+const ButtonConfirmDeny = 
 	new MessageActionRow().addComponents(
 		new MessageButton()
 			.setCustomId('Confirm,')
 			.setEmoji('👍')
 			.setLabel('Confirm')
-			.setStyle('PRIMARY')
-);
-//#endregion
-
-//#region Button
-const ButtonDeny = 
-	new MessageActionRow().addComponents(
+			.setStyle('PRIMARY'),
 		new MessageButton()
-			.setCustomId('Deny,')
+			.setCustomId(`${YESNO.DENY}`)
 			.setEmoji('❌')
 			.setLabel('Cancel')
 			.setStyle('DANGER')
@@ -40,7 +35,8 @@ const ButtonDeny =
 //#endregion
 
 
-//#region Embed 
+
+//#region Embed Need Confrimation
 const EmbedNeedConfirmation = 
 	new MessageEmbed()
 	.setColor(COLORS.HEXS.BLUE)
@@ -52,33 +48,43 @@ const EmbedNeedConfirmation =
 
 
 
-//#region 
+//#region Embed Not The Command User
 const EmbedNotUser = 
 	new MessageEmbed()
-	.setColor(COLORS.HEXS.DARKRED)
-	.setTitle('NOT USER')
-	.setDescription('Only the user who ran the command can click the button')
-	.setTimestamp();
+		.setColor(COLORS.HEXS.DARKRED)
+		.setTitle('NOT USER')
+		.setDescription('Only the user who ran the command can click the button')
+		.setTimestamp();
 //#endregion
 
+
+//#region Embed No Perm
 const EmbedNoPerm = 
 	new MessageEmbed()
 	.setColor(COLORS.HEXS.DARKRED)
 	.setTitle('No Permissions!')
 	.setDescription('You are no allowed to use this command!')
 	.setTimestamp();
+//#endregion
+
 
 //#region Canceled
 const EmbedCanceled = 
 	new MessageEmbed()
 	.setColor(COLORS.HEXS.DARKRED)
-	.setTitle('CANCELED ACTION')
-	.setDescription('ACTION GOT CANCELED!')
+	.setTitle('Action Was Canceled')
 	.setTimestamp();
 
 //#endregion
 
+//#region Canceled
+const EmbedNoNeed = 
+	new MessageEmbed()
+	.setColor(COLORS.HEXS.WHITE)
+	.setTitle('This Action Was Preformed Already')
+	.setTimestamp();
 
+//#endregion
 
 //#region Success
 const EmbedSuccess = 
@@ -91,8 +97,7 @@ const EmbedSuccess =
 //#endregion
 
 module.exports = {
-	ButtonNeedConfirmation,
-	ButtonDeny,
+	ButtonConfirmDeny,
 	EmbedNeedConfirmation,
 	EmbedMissingArgs,
 	EmbedFailed,
@@ -100,5 +105,6 @@ module.exports = {
 	EmbedNotUser,
 	EmbedCanceled,
 	EmbedNoPerm,
+	EmbedNoNeed,
 	
 };
