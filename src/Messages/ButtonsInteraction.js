@@ -1,7 +1,7 @@
 const { Message, MessageActionRow, MessageButton } = require("discord.js");
-const { EmbedNotUser, EmbedSuccess, EmbedCanceled } = require("./Messages/Messages");
-const { SAVES, YESNO } = require('./Credentials/Config.json');
-const Saving = require('./Save/Save_File');
+const { EmbedNotUser, EmbedSuccess, EmbedCanceled } = require("./Messages");
+const { SAVES, YESNO } = require('../Credentials/Config.json');
+const Saving = require('../Save/Save_File');
 
 
 function interact(msg = new Message(), bmsg = new Message()){

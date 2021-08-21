@@ -1,5 +1,5 @@
 const { Message } = require('discord.js');
-const { interact } = require('../ButtonsInteraction');
+const { interact } = require('../Messages/ButtonsInteraction');
 const { ButtonConfirmDeny, EmbedNoPerm, EmbedMissingArgs, EmbedNeedConfirmation, EmbedSuccess, EmbedNoNeed} = require('../Messages/Messages');
 const { SAVES, YESNO } = require('../Credentials/Config.json');
 const SaveFile = require('../Save/Save_File.json');
@@ -9,9 +9,7 @@ var n = "addpermrole";
 
 
 function messageSent(msg = new Message()){
-	var isRoleSaved = Object.values(SaveFile[msg.guildId][SAVES.Roles]).find(val => val === msg.mentions.roles.first().id.toString());
-	console.log(isRoleSaved);
-	if(msg.mentions.roles.first() && !isRoleSaved){
+	if(msg.mentions.roles.first() && !Object.values(SaveFile[msg.guildId][SAVES.Roles]).find(val => val === msg.mentions.roles.first().id.toString())){
 		EmbedNeedConfirmation
 			.setDescription(`This role will be added to the mod commands permitted roles
 			\n(you can remove it later on)`)
@@ -30,7 +28,7 @@ function messageSent(msg = new Message()){
 
 		return;
 	}
-	else if(isRoleSaved){
+	else if(msg.mentions.roles.first()){
 		EmbedNoNeed.setDescription(`This Role Has Already Been Added! 
 		\n(If you wish to remove it use -removepermrole)`)
 
