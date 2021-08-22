@@ -9,14 +9,14 @@ var n = "addpermrole";
 
 
 function messageSent(msg = new Message()){
-	if(msg.mentions.roles.first() && !Object.values(SaveFile[msg.guildId][SAVES.Roles]).find(val => val === msg.mentions.roles.first().id.toString())){
+	if(msg.mentions.roles.first() && !Object.values(SaveFile[msg.guildId][SAVES.Permissions]).find(val => val === msg.mentions.roles.first().id.toString())){
 		EmbedNeedConfirmation
 			.setDescription(`${msg.mentions.roles.first()} will be added to the mod commands permitted roles
 			\n(you can remove it later on)`)
 			.setAuthor(msg.author.username, msg.author.avatarURL());
 
 		ButtonConfirmDeny.components[0].setCustomId
-		(`${msg.guild.id},${SAVES.Roles},${msg.mentions.roles.first().name}:${msg.mentions.roles.first().id},${YESNO.CONFIRM}`);
+		(`${msg.guild.id},${SAVES.Permissions},${msg.mentions.roles.first().name}:${msg.mentions.roles.first().id},${YESNO.CONFIRM}`);
 
 			
 
@@ -49,7 +49,7 @@ function messageSent(msg = new Message()){
 module.exports = ({
 	name : n,
 	async execute(msg = new Message()){
-		if(msg.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || msg.member.roles.cache.find(r => Object.values(SaveFile[msg.guildId][SAVES.Roles]).includes(r.id)))
+		if(msg.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || msg.member.roles.cache.find(r => Object.values(SaveFile[msg.guildId][SAVES.Permissions]).includes(r.id)))
 			await messageSent(msg);
 		else
 			msg.member.send({ embeds: [EmbedNoPerm]}).then(bmsg => {msg.delete();});

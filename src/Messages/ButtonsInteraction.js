@@ -25,10 +25,10 @@ function interact(msg = new Message(), bmsg = new Message()){
 		}
 		id = ButtonInteraction.first().customId.split(',');
 		
-		if(id[1] == SAVES.Roles){
+		if(id[1] == SAVES.Permissions){
 			EmbedSuccess.setAuthor(msg.author.username, msg.author.avatarURL());
 			bmsg.edit({ embeds: [EmbedSuccess], components: [] });
-			Saving.EXECUTESAVE(msg.guild.id, SAVES.Roles, id[2]);
+			Saving.EXECUTESAVE(msg.guild.id, SAVES.Permissions, id[2]);
 		}
 	});
 

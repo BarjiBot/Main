@@ -56,8 +56,8 @@ bot.once('ready', () => {
 
 // Message Detection And Redirect To CommandHandler
 bot.on('messageCreate', msg => {
-	CommandHandler(msg);
 	MessageHandler(msg);
+	CommandHandler(msg);
 });
 
 
