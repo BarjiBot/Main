@@ -55,3 +55,5 @@ bot.on('messageCreate', msg => {
 
 
 bot.login(TOKEN); // Bot Start Up
+
+

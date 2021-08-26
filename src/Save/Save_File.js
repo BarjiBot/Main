@@ -14,22 +14,35 @@ function SETUP(server = new Guild()){
 		console.log('Setting up Save-Files.json');
 	});
 }
-function ROLESSETUP(server){
+function ROLESSETUP(server = new Guild()){
 	// Adding Roles To SaveFile
 
+
+	if(!server.roles.cache.find(r => r.name === ROLES.Image)){
 	server.roles.create({name: ROLES.Image, color:'AQUA', permissions:'ATTACH_FILES'}).finally(r =>
 		{SaveFile[server.id][SAVES.Roles.toString()][ROLES.Image] = server.roles.cache.find(role => role.name === ROLES.Image).id}
 	).catch(console.error);
-	
 
-	server.roles.create({name: ROLES.Link, color:'AQUA', permissions:'EMBED_LINKS'}).finally(r =>{
+	}else{
+		SaveFile[server.id][SAVES.Roles.toString()][ROLES.Image] = server.roles.cache.find(role => role.name === ROLES.Image).id
+	}
+	
+	if(!server.roles.cache.find(r => r.name === ROLES.Link)){
+		server.roles.create({name: ROLES.Link, color:'AQUA', permissions:'EMBED_LINKS'}).finally(r =>{
+			SaveFile[server.id][SAVES.Roles.toString()][ROLES.Link] = server.roles.cache.find(role => role.name === ROLES.Link).id;
+			fs.writeFile('src/Save/Save_File.json', JSON.stringify(SaveFile), function writeJSON(err) {
+				if (err) return console.log(err);
+				console.log('Setting up Roles in Save-Files.json');
+			});
+		}
+		).catch(console.error);
+	}else{
 		SaveFile[server.id][SAVES.Roles.toString()][ROLES.Link] = server.roles.cache.find(role => role.name === ROLES.Link).id;
 		fs.writeFile('src/Save/Save_File.json', JSON.stringify(SaveFile), function writeJSON(err) {
 			if (err) return console.log(err);
 			console.log('Setting up Roles in Save-Files.json');
 		});
 	}
-	).catch(console.error);
 	
 	
 }

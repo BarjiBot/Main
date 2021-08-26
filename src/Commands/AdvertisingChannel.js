@@ -1,18 +1,37 @@
-const { Message } = require('discord.js');
-const { EmbedNeedConfirmation } = require('../Messages/Messages');
+const { Message, Permissions } = require('discord.js');
+const { interact } = require('../Messages/ButtonsInteraction');
+const { ButtonConfirmDeny, EmbedNoPerm, EmbedMissingArgs, EmbedNeedConfirmation, EmbedSuccess, EmbedNoNeed} = require('../Messages/Messages');
+const { SAVES, YESNO } = require('../Credentials/Config.json');
+const SaveFile = require('../Save/Save_File.json');
 
 var n = "adchannel";
 
 
 
-function messageSent(msg = new Message(), args = []){
-	if(!msg.args.includes(CONFIRM)){
-		EmbedNeedConfirmation.setDescription(`This action will add this channel to the advertising channels list
-		\n(This can be changed later on))`);
-		msg.reply({ embeds: [EmbedNeedConfirmation] }).then(mesg => {msg.delete();});
-		return; 
+function messageSent(msg = new Message()){
+	if(SaveFile[msg.guildId][SAVES.Channels][msg.channel.name])
+	{
+		msg.reply({embeds: [EmbedNoNeed]}).then(mesg => {msg.delete();});
+		return;
 	}
 
+	EmbedNeedConfirmation
+		.setDescription(`${msg.channel} will be added to the ad channels list
+		\n(you can remove it later on)`)
+		.setAuthor(msg.author.username, msg.author.avatarURL());
+
+	ButtonConfirmDeny.components[0].setCustomId
+	(`${msg.guild.id},${SAVES.Channels},${msg.channel.name}:${msg.channelId},${YESNO.CONFIRM}`);
+
+	
+
+	msg.reply({ 
+		embeds: [EmbedNeedConfirmation], 
+		components: [ButtonConfirmDeny]})
+		.then(bmsg => {msg.delete();interact(msg, bmsg);});
+	
+
+	return;
 }
 
 module.exports = ({

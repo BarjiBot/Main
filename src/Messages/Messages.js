@@ -1,6 +1,23 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const { COLORS, YESNO } = require('../Credentials/Config.json');
 
+//#region 
+const EmbedInvitesNotAllowed = 
+	new MessageEmbed()
+		.setColor(COLORS.HEXS.DARKRED)
+		.setTitle('Discord Invites Are Not Allowed!')
+		.setDescription('Sorry But Discord Invites Are Disabled')
+		.setTimestamp();
+//#endregion
+
+//#region 
+const EmbedLinksNotAllowed = 
+	new MessageEmbed()
+		.setColor(COLORS.HEXS.DARKRED)
+		.setTitle('Links Are Not Allowed In This Channel!')
+		.setTimestamp();
+//#endregion
+
 //#region Embed Failed
 const EmbedFailed = 
 	new MessageEmbed()
@@ -106,5 +123,6 @@ module.exports = {
 	EmbedCanceled,
 	EmbedNoPerm,
 	EmbedNoNeed,
-	
+	EmbedInvitesNotAllowed,
+	EmbedLinksNotAllowed,
 };
