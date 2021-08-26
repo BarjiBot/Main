@@ -34,9 +34,6 @@ const CommandHandler = require('./Commands/Handlers/CommandHandler');
 const MessageHandler = require('./Messages/MessageHandler');
 
 
-
-
-
 // Bot Startup Message
 bot.once('ready', () => {
 	
@@ -59,9 +56,6 @@ bot.on('messageCreate', msg => {
 	MessageHandler.Run(msg);
 	CommandHandler(msg);
 });
-
-
-
 
 
 
