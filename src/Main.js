@@ -24,9 +24,6 @@ const bot = new Client({
 
 ]});
 
-
-const Saving = require('./Save/Save_File');
-
 // Command Handler import - Handles command files and executes them at send of message
 const CommandHandler = require('./Commands/Handlers/CommandHandler');
 
@@ -39,17 +36,15 @@ bot.once('ready', () => {
 	
 	console.log(`${bot.user.tag} has been activated succesfully`);
 
-
 	// Bot's Status
 	bot.user.setActivity(`Use ${PREFIX}help`, {
 		type: "STREAMING",
-		
 		url: "https://www.twitch.tv/barji"
 	});
 
 });
 
- 
+
 
 // Message Detection And Redirect To CommandHandler
 bot.on('messageCreate', msg => {
@@ -60,14 +55,3 @@ bot.on('messageCreate', msg => {
 
 
 bot.login(TOKEN); // Bot Start Up
-
-
-
-
-
-
-
-
-
-
-

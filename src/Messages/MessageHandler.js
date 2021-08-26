@@ -4,12 +4,10 @@ const Saving = require('../Save/Save_File.js');
 const SaveFile = require('../Save/Save_File.json');
 
 function RunSaves(user, guildID){
-	console.log(`${guildID} ${user.id}`)
 
 	if(!user.roles.cache.find(r => r.id === SaveFile[guildID][SAVES.Roles][ROLES.Image]) && SaveFile[guildID][SAVES.Messages][user.id] >= 500)
 		user.roles.add(SaveFile[guildID][SAVES.Roles][ROLES.Image]);
-	console.log(!user.roles.cache.find(r => r.id === SaveFile[guildID][SAVES.Roles][ROLES.Link]));
-	console.log(SaveFile[guildID][SAVES.Messages][user.id] >= 1000);
+
 	if(!user.roles.cache.find(r => r.id === SaveFile[guildID][SAVES.Roles][ROLES.Link]) && SaveFile[guildID][SAVES.Messages][user.id] >= 1000)
 		user.roles.add(SaveFile[guildID][SAVES.Roles][ROLES.Link]);
 }
