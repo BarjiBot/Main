@@ -16,13 +16,15 @@ module.exports = (async function(msg = new Message()){
 		{
 			if(!SaveFile[msg.guildId][SAVES.Roles][ROLES.Link])Saving.ROLESSETUP(msg.guild);
 
+			Saving.EXECUTEMESSAGESAVE(msg.guildId, msg.author.id);
+			
 			if(SaveFile[msg.guildId][SAVES.Messages][msg.author.id] < 1000 || !SaveFile[msg.guildId][SAVES.Messages][msg.author.id]) 
-				Saving.EXECUTEMESSAGESAVE(msg.guildId, msg.author.id);
+				return;
 
-			if(SaveFile[msg.guildId][SAVES.Messages][msg.author.id] >= 500 && !msg.member.roles.cache.find(SaveFile[msg.guildId][SAVES.Roles][ROLES.Image]))
+			if(!msg.member.roles.cache.find(r => r.id === SaveFile[msg.guildId][SAVES.Roles][ROLES.Image]) && SaveFile[msg.guildId][SAVES.Messages][msg.author.id] >= 500)
 				msg.member.roles.add(SaveFile[msg.guildId][SAVES.Roles][ROLES.Image]);
 
-			if(SaveFile[msg.guildId][SAVES.Messages][msg.author.id] >= 1000 && !msg.member.roles.cache.find(SaveFile[msg.guildId][SAVES.Roles][ROLES.Link]))
+			if(!msg.member.roles.cache.find(r => r.id === SaveFile[msg.guildId][SAVES.Roles][ROLES.Link]) && SaveFile[msg.guildId][SAVES.Messages][msg.author.id] >= 1000)
 				msg.member.roles.add(SaveFile[msg.guildId][SAVES.Roles][ROLES.Link]);
 		}
 

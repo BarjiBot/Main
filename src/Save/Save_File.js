@@ -46,8 +46,16 @@ function SAVE(server, location, data){
 }
 
 function MESSAGESAVE(server, location, userID, amount = 1){
+	
 	if(!SaveFile[server][location][userID])SaveFile[server][location][userID] = 1;
-	else SaveFile[server][location][userID] += amount;
+	else {
+		var data = JSON.stringify(SaveFile[server][location][userID]);
+		data = parseInt(data) + parseInt(amount);
+		console.log(`data: ${data}, SaveFile:${SaveFile[server][location]}`)
+		SaveFile[server][location][userID] = JSON.parse(data);
+	}
+
+	
 
 	fs.writeFile('src/Save/Save_File.json', JSON.stringify(SaveFile), function writeJSON(err) {
 		if (err) return console.log(err);

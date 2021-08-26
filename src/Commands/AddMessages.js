@@ -1,5 +1,5 @@
 const { Message, Permissions } = require("discord.js");
-const { EmbedSuccess } = require('../Messages/MessageHandler');
+const { EmbedSuccess } = require('../Messages/Messages');
 const { SAVES } = require('../Credentials/Config.json');
 const Saving = require('../Save/Save_File.js');
 
@@ -10,7 +10,7 @@ function messageSent(msg = new Message()){
 	if(msg.mentions.members.first().id && msg.args[1]){
 		var user = msg.mentions.members.first();
 		Saving.EXECUTEMESSAGESAVE(msg.guildId, user.id, msg.args[1]);
-		msg.reply({embeds: [EmbedSuccess]});
+		msg.reply({embeds: [EmbedSuccess]}).then(bmsg => {msg.delete();});
 	}
 }
 
