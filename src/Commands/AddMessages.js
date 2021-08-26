@@ -1,7 +1,8 @@
 const { Message, Permissions } = require("discord.js");
-const { EmbedSuccess, EmbedFailed, EmbedMissingArgs } = require('../Messages/Messages');
+const { EmbedSuccess, EmbedMissingArgs } = require('../Messages/Messages');
 const { SAVES } = require('../Credentials/Config.json');
 const Saving = require('../Save/Save_File.js');
+const MessageHandler = require("../Messages/MessageHandler");
 
 var n = "addmessages";
 
@@ -9,6 +10,7 @@ function messageSent(msg = new Message()){
 	if(msg.mentions.members.first() && typeof parseInt(msg.args[1]) == 'number' && msg.args.length == 2){
 		var user = msg.mentions.members.first();
 		Saving.EXECUTEMESSAGESAVE(msg.guildId, user.id, msg.args[1]);
+		MessageHandler.RunSaves(user, msg.guild.id);
 		msg.reply({embeds: [EmbedSuccess]}).then(bmsg => {msg.delete();});
 		return;
 	}

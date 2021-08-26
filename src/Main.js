@@ -56,7 +56,7 @@ bot.once('ready', () => {
 
 // Message Detection And Redirect To CommandHandler
 bot.on('messageCreate', msg => {
-	MessageHandler(msg);
+	MessageHandler.Run(msg);
 	CommandHandler(msg);
 });
 

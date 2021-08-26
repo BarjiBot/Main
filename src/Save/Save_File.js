@@ -47,7 +47,7 @@ function SAVE(server, location, data){
 
 function MESSAGESAVE(server, location, userID, amount = 1){
 	
-	if(!SaveFile[server][location][userID])SaveFile[server][location][userID] = 1;
+	if(!SaveFile[server][location][userID])SaveFile[server][location][userID] = parseInt(amount);
 	else {
 		var data = JSON.stringify(SaveFile[server][location][userID]);
 		data = parseInt(data) + parseInt(amount);

@@ -1,33 +1,31 @@
-const { Message } = require("discord.js");
+const { Message, User } = require("discord.js");
 const { ID, SAVES, ROLES } = require('../Credentials/Config.json');
 const Saving = require('../Save/Save_File.js');
 const SaveFile = require('../Save/Save_File.json');
 
+function RunSaves(user, guildID){
+	console.log(`${guildID} ${user.id}`)
 
-module.exports = (async function(msg = new Message()){
-	if(msg.author.id != ID){
+	if(!user.roles.cache.find(r => r.id === SaveFile[guildID][SAVES.Roles][ROLES.Image]) && SaveFile[guildID][SAVES.Messages][user.id] >= 500)
+		user.roles.add(SaveFile[guildID][SAVES.Roles][ROLES.Image]);
+	console.log(!user.roles.cache.find(r => r.id === SaveFile[guildID][SAVES.Roles][ROLES.Link]));
+	console.log(SaveFile[guildID][SAVES.Messages][user.id] >= 1000);
+	if(!user.roles.cache.find(r => r.id === SaveFile[guildID][SAVES.Roles][ROLES.Link]) && SaveFile[guildID][SAVES.Messages][user.id] >= 1000)
+		user.roles.add(SaveFile[guildID][SAVES.Roles][ROLES.Link]);
+}
+function Run(msg = new Message()){
+	if(msg.member.id != ID){
 		
 		// The first message the bot recives will setup the SaveFile of the server
-		if(!SaveFile[msg.guild.id.toString()]){
-			Saving.SETUP(msg.guild);
-			
-		}
+		if(!SaveFile[msg.guild.id.toString()]) Saving.SETUP(msg.guild);
 		else
 		{
 			if(!SaveFile[msg.guildId][SAVES.Roles][ROLES.Link])Saving.ROLESSETUP(msg.guild);
-
 			Saving.EXECUTEMESSAGESAVE(msg.guildId, msg.author.id);
-			
-			if(SaveFile[msg.guildId][SAVES.Messages][msg.author.id] < 1000 || !SaveFile[msg.guildId][SAVES.Messages][msg.author.id]) 
-				return;
+			RunSaves(msg.member, msg.guild.id);
 
-			if(!msg.member.roles.cache.find(r => r.id === SaveFile[msg.guildId][SAVES.Roles][ROLES.Image]) && SaveFile[msg.guildId][SAVES.Messages][msg.author.id] >= 500)
-				msg.member.roles.add(SaveFile[msg.guildId][SAVES.Roles][ROLES.Image]);
-
-			if(!msg.member.roles.cache.find(r => r.id === SaveFile[msg.guildId][SAVES.Roles][ROLES.Link]) && SaveFile[msg.guildId][SAVES.Messages][msg.author.id] >= 1000)
-				msg.member.roles.add(SaveFile[msg.guildId][SAVES.Roles][ROLES.Link]);
 		}
-
-		
 	}
-});	
+}
+
+module.exports = {Run, RunSaves};	
