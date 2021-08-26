@@ -6,7 +6,6 @@ var n = "adchannel";
 
 
 function messageSent(msg = new Message(), args = []){
-	console.log("function started");
 	if(!msg.args.includes(CONFIRM)){
 		EmbedNeedConfirmation.setDescription(`This action will add this channel to the advertising channels list
 		\n(This can be changed later on))`);
@@ -19,7 +18,9 @@ function messageSent(msg = new Message(), args = []){
 module.exports = ({
 	name : n,
 	async execute(msg = new Message()){
-		//if(msg.member.roles.cache.has())
-		await messageSent(msg);
+		if(msg.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || msg.member.roles.cache.find(r => Object.values(SaveFile[msg.guildId][SAVES.Permissions]).includes(r.id)))
+			await messageSent(msg);
+		else
+			msg.member.send({ embeds: [EmbedNoPerm]}).then(bmsg => {msg.delete();});
 	},
 });

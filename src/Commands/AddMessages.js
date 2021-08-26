@@ -1,17 +1,25 @@
 const { Message, Permissions } = require("discord.js");
-const { EmbedSuccess } = require('../Messages/Messages');
+const { EmbedSuccess, EmbedFailed, EmbedMissingArgs } = require('../Messages/Messages');
 const { SAVES } = require('../Credentials/Config.json');
 const Saving = require('../Save/Save_File.js');
 
 var n = "addmessages";
 
 function messageSent(msg = new Message()){
-	console.log(typeof msg.args[1] == 'number');
-	if(msg.mentions.members.first().id && msg.args[1]){
+	if(msg.mentions.members.first() && typeof parseInt(msg.args[1]) == 'number' && msg.args.length == 2){
 		var user = msg.mentions.members.first();
 		Saving.EXECUTEMESSAGESAVE(msg.guildId, user.id, msg.args[1]);
 		msg.reply({embeds: [EmbedSuccess]}).then(bmsg => {msg.delete();});
+		return;
 	}
+	else{
+		EmbedMissingArgs.setDescription(`missing arguments for command! 
+		\n Please make sure the command is written like this:
+		\n -addmessages <User Mention> <Amount>`)
+		msg.reply({embeds: [EmbedMissingArgs]})
+		return;
+	}
+
 }
 
 

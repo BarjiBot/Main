@@ -4,13 +4,10 @@ const { CFM } = require("./CommandFiles");
 
 
 module.exports = (async function(msg = new Message()){
-	//console.log(msg);
 	if(msg.content[0] == PREFIX){
-		
-		console.log(msg.content.indexOf(' '));
 
 		// The message string
-		content = msg.content; 
+		var content = msg.content; 
 
 		// The Command
 		cmdInput = msg.content.substring(1, msg.content.indexOf(' ')).toLowerCase();
@@ -30,13 +27,10 @@ module.exports = (async function(msg = new Message()){
 
 		// Arguments
 		msg.args = [];
-		while(content.includes(' ') && content.includes(' ') + 1 != content.length){
-			console.log(content);
-			msg.args.push(content.substring(content.indexOf(' ') + 1));
-			content = content.substring(content.indexOf(' ') + 1);
-		}
+		if(content.includes(' ') && content.includes(' ') + 1 != content.length)
+			{msg.args = content.split(' '); msg.args.shift()}
+		
 
-		console.log(msg.args) // Debug
 
 		msg.confirm = false; // Confirmation 
 

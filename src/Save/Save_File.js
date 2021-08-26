@@ -51,7 +51,6 @@ function MESSAGESAVE(server, location, userID, amount = 1){
 	else {
 		var data = JSON.stringify(SaveFile[server][location][userID]);
 		data = parseInt(data) + parseInt(amount);
-		console.log(`data: ${data}, SaveFile:${SaveFile[server][location]}`)
 		SaveFile[server][location][userID] = JSON.parse(data);
 	}
 
@@ -59,7 +58,7 @@ function MESSAGESAVE(server, location, userID, amount = 1){
 
 	fs.writeFile('src/Save/Save_File.json', JSON.stringify(SaveFile), function writeJSON(err) {
 		if (err) return console.log(err);
-		console.log('Saving in Save_Files.json');
+		console.log('Saving Messages in Save_Files.json');
 	});
 	return this;
 }
