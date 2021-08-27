@@ -23,7 +23,8 @@ function Run(msg = new Message()){
 			msg.author.send({embeds: [EmbedInvitesNotAllowed]}).then(mesg => {msg.delete()});
 			return;
 		}
-		if(msg.content.includes('https://'||'http://'||'www.') && !JSON.stringify(SaveFile[msg.guildId][SAVES.Channels]).includes(msg.channelId.toString())){
+		if(msg.content.includes('https://'||'http://'||'www.') && !JSON.stringify(SaveFile[msg.guildId][SAVES.Channels]).includes(msg.channelId.toString())
+			&& !msg.member.roles.cache.find(r => r.id === SaveFile[msg.guildId][SAVES.Roles][ROLES.Link])){
 			EmbedLinksNotAllowed.setAuthor(msg.guild.name, msg.guild.iconURL());
 			EmbedLinksNotAllowed.setDescription(`Unfortunately you cant send messages at ${msg.channel},
 			\n you can only send links in: <#${Array.from(Object.values(SaveFile[msg.guildId][SAVES.Channels])).join('>, <#')}>`)
