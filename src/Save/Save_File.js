@@ -76,7 +76,21 @@ function MESSAGESAVE(server, location, userID, amount = 1){
 	return this;
 }
 
+function REMOVE(server, location, data){
+	data = data.split(":");
+	var value = data[0];
+	SaveFile[server][location][data[0]] = data[1];
+	Object.keys(SaveFile[server][location]).forEach(function(key){
+		if (key === value) {
+			delete SaveFile[server][location][key];
+		}
+	});
+	fs.writeFile('src/Save/Save_File.json', JSON.stringify(SaveFile), function writeJSON(err) {
+		if (err) return console.log(err);
+		console.log(`Removed ${value} from ${location} at ${server}`);
+	});
 
+}
 
 async function EXECUTESAVE(server, location, data){
 	await SAVE(server, location, data);
@@ -86,4 +100,5 @@ async function EXECUTEMESSAGESAVE(server, userID, amount = 1){
 }
 
 
-module.exports = {SETUP, ROLESSETUP, EXECUTESAVE, EXECUTEMESSAGESAVE};
+
+module.exports = {SETUP, ROLESSETUP, EXECUTESAVE, EXECUTEMESSAGESAVE, REMOVE};

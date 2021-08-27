@@ -6,12 +6,28 @@ const SaveFile = require('../Save/Save_File.json');
 
 var n = "adchannel";
 
+function remove(msg = new Message()){
+	EmbedNeedConfirmation
+		.setDescription(`${msg.channel} is already in the ad channels list
+		\nwill you like to remove it?`)
+		.setAuthor(msg.author.username, msg.author.avatarURL());
 
+	ButtonConfirmDeny.components[0].setCustomId
+	(`${msg.guild.id},${SAVES.Channels},${msg.channel.name}:${msg.channelId},${YESNO.DENY}`);
+	
+	
+
+	msg.reply({ 
+		embeds: [EmbedNeedConfirmation], 
+		components: [ButtonConfirmDeny]})
+		.then(bmsg => {msg.delete();interact(msg, bmsg);});
+	
+}
 
 function messageSent(msg = new Message()){
 	if(SaveFile[msg.guildId][SAVES.Channels][msg.channel.name])
 	{
-		msg.reply({embeds: [EmbedNoNeed]}).then(mesg => {msg.delete();});
+		remove(msg);
 		return;
 	}
 

@@ -32,15 +32,21 @@ function interact(msg = new Message(), bmsg = new Message()){
 			Saving.EXECUTESAVE(msg.guild.id, SAVES.Permissions, id[2]);
 		}
 		if(id[1] == SAVES.Channels){
-			EmbedSuccess.setAuthor(msg.author.username, msg.author.avatarURL());
-			bmsg.edit({ embeds: [EmbedSuccess], components: [] });
-			Saving.EXECUTESAVE(msg.guild.id, SAVES.Channels, id[2]).then(r =>{
-				var linkRole = msg.guild.roles.cache.find(r => r.name === ROLES.Link);
-				var channel = msg.guild.channels.cache.find(c => c.id === id[2].split(':')[1]);
-				console.log(channel.name);
-				channel.permissionOverwrites.create(msg.guild.roles.everyone,{'SEND_MESSAGES': false});
-				channel.permissionOverwrites.create(linkRole,{'SEND_MESSAGES': true});
-		});
+			if(id[3] == YESNO.CONFIRM){
+				EmbedSuccess.setAuthor(msg.author.username, msg.author.avatarURL());
+				bmsg.edit({ embeds: [EmbedSuccess], components: [] });
+				Saving.EXECUTESAVE(msg.guild.id, SAVES.Channels, id[2]).then(r =>{
+					var linkRole = msg.guild.roles.cache.find(r => r.name === ROLES.Link);
+					var channel = msg.guild.channels.cache.find(c => c.id === id[2].split(':')[1]);
+					console.log(channel.name);
+					channel.permissionOverwrites.create(msg.guild.roles.everyone,{'SEND_MESSAGES': false});
+					channel.permissionOverwrites.create(linkRole,{'SEND_MESSAGES': true});
+			
+				});
+			}else{
+				Saving.REMOVE(msg.guild.id, SAVES.Channels, id[2]);
+				bmsg.edit({ embeds: [EmbedSuccess], components: [] });
+			}
 		}
 	});
 
