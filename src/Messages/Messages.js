@@ -10,6 +10,7 @@ const EmbedHelp =
 		.setDescription(`Current commands prefix: ${PREFIX}
 						\nping :: Will send you the bot's ping
 						\nbusiness :: Will send you Barji's business related contacts
+						\nmymessages :: Will show you the amount of messages the bot counted
 						\nHave a good day 😄`)
 		.setTimestamp();
 //#endregion
