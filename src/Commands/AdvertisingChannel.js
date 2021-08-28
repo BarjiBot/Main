@@ -53,7 +53,7 @@ function messageSent(msg = new Message()){
 module.exports = ({
 	name : n,
 	async execute(msg = new Message()){
-		if(msg.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || msg.member.roles.cache.find(r => Object.values(SaveFile[msg.guildId][SAVES.Permissions]).includes(r.id)))
+		if(msg.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || msg.member.roles.cache.find(r => Object.values(SaveFile[msg.guildId][SAVES.Roles]).includes(r.id)))
 			await messageSent(msg);
 		else
 			msg.member.send({ embeds: [EmbedNoPerm]}).then(bmsg => {msg.delete();});
