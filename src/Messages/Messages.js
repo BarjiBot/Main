@@ -1,5 +1,5 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
-const { PREFIX, COLORS, YESNO, Email } = require('../Credentials/Config.json');
+const { PREFIX, COLORS, YESNO, Email, TwitterURL, TwitterID } = require('../Credentials/Config.json');
 
 
 //#region Help
@@ -19,9 +19,10 @@ const EmbedModHelp =
 	new MessageEmbed()
 		.setColor(COLORS.HEXS.YELLOW)
 		.setTitle('BotG Mod Commands')
-		.setDescription(`adchannel :: adds/removes the channel the command was used on to the adchannels list
-						addpermrole [@role] :: adds the role to the permitted roles list (ADMIN ONLY)
-						addmessages [@member] [amount] :: adds amount of messages to member (ADMIN ONLY)`)
+		.setDescription(`business [@member] :: sends the @member barji business details
+						\nadchannel :: adds/removes the channel the command was used on to the adchannels list
+						\naddpermrole [@role] :: adds the role to the permitted roles list (ADMIN ONLY)
+						\naddmessages [@member] [amount] :: adds amount of messages to member (ADMIN ONLY)`)
 		.setTimestamp();
 //#endregion
 
@@ -30,8 +31,9 @@ const EmbedBusiness =
 	new MessageEmbed()
 		.setColor(COLORS.HEXS.BLUE)
 		.setTitle('Barji Business')
-		.setDescription(`If you would like to contact Barji with business related inquiries you can use these:
-		\nEmail: ${Email}`)
+		.setDescription(`If you would like to contact Barji with business related inquiries you can use these:`)
+		.addField(`\nEmail: ${Email}`, `-`)
+		.addField(`\nTwitter: ${TwitterID}`, `or click here: [Click Here](${TwitterURL})`)
 		.setTimestamp();
 //#endregion
 
