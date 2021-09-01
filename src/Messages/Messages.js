@@ -1,7 +1,10 @@
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const { PREFIX, COLORS, YESNO, Email, TwitterURL, TwitterID } = require('../Credentials/Config.json');
 
-
+const EmbedTest = 
+	new MessageEmbed()
+		.setFields()
+		.setTimestamp();
 //#region Help
 const EmbedHelp = 
 	new MessageEmbed()

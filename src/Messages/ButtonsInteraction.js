@@ -30,6 +30,7 @@ function interact(msg = new Message(), bmsg = new Message()){
 			bmsg.edit({ embeds: [EmbedSuccess], components: [] });
 			Saving.EXECUTESAVE(msg.guild.id, SAVES.Permissions, id[2]);
 		}
+		
 		if(id[1] == SAVES.Channels){
 			if(id[3] == YESNO.CONFIRM){
 				EmbedSuccess.setAuthor(msg.author.username, msg.author.avatarURL());

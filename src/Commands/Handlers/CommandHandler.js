@@ -11,6 +11,7 @@ module.exports = (async function(msg = new Message()){
 
 		// The Command
 		cmdInput = msg.content.substring(1, msg.content.indexOf(' ')).toLowerCase();
+		
 		// Incase The Command Doesn't have any arguments
 		if(!content.includes(' ')) cmdInput = msg.content.substring(1).toLowerCase();
 

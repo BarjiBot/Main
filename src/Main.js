@@ -1,7 +1,6 @@
 // Config import
 const { TOKEN, PREFIX } = require('./Credentials/Config');
 
-
 // Discord JS import
 const { Client, Intents } = require('discord.js');
 const bot = new Client({ 
